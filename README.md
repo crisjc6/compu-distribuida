@@ -83,6 +83,7 @@ void new_test(int argc, char **argv)
 `Task id = 11, exec_time = 57001000000, run_delay = 2998000000, pcount = 61`
 ```
 Este resultado muestra la lista de tareas (numeradas por ID de tarea), su tiempo de ejecución total (en ticks), la cantidad de tiempo que esperaron para ejecutarse y, finalmente, la cantidad de veces que se invocaron.
+Un solo ticks representa cien nanosegundos.
 
 Según este escenario, las primeras cinco tareas son tareas ocupadas y duermen el 10% del tiempo. Las segundas cinco tareas duermen la mayor parte del tiempo y están ocupadas el 10% del tiempo. La última tarea es una tarea en tiempo real y está ocupada el 100% del tiempo. Como se muestra, la tarea en tiempo real recibe la mayor parte del procesador único y se invoca solo 61 veces.
 
