@@ -25,6 +25,9 @@ Las tareas que se tiene son
 **LinSched**  para modelar estos escenarios de tareas. la **API** permite la creacion de tareas normales con la politica SCHED_NORMAL, batch con la politica SCHED_BATCH, o de tiempo real. 
 SCHED_FIFO, SCHED_RR, 
 
+Esta se pueden probar en
+"uniprocessor" "dual_cpu" "dual_cpu_mc" "quad_cpu" "quad_cpu_mc" "quad_cpu_dual_socket" "quad_cpu_quad_socket" "hex_cpu_dual_socket_smt"
+
 ``` C
 void new_test(int argc, char **argv)
 {
