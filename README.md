@@ -105,3 +105,12 @@ En operaciones [computacionales](https://es.wikipedia.org/wiki/Computadora "Comp
 La planificación se ejecuta acorde a un ranking de prioridad. Utiliza prioridades dinámicas que son ajustadas a través del tiempo. Los procesos que no han sido ejecutados por ele procesador en un periodo largo de tiempo, aumentan su prioridad. Los que han sido ejecutados por mayor tiempo, reducen su prioridad.
 
 Referencias
+
+
+git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/pjt/linsched
+
+https://www.ibm.com/developerworks/library/l-linux-scheduler-simulator/index.html
+
+https://www.ibm.com/developerworks/library/l-linux-scheduler-simulator/l-linux-scheduler-simulator-pdf.pdf
+
+http://webdelprofesor.ula.ve/ingenieria/gilberto/so/02_Planificador.pdf
