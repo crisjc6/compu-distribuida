@@ -60,32 +60,40 @@ void new_test(int argc, char **argv)
 ```
 
 ``` C
-`Task id = 1, exec_time = 305000000, run_delay = 59659000000, pcount = 156`
-
-`Task id = 2, exec_time = 302000000, run_delay = 58680000000, pcount = 154`
-
-`Task id = 3, exec_time = 304000000, run_delay = 58708000000, pcount = 155`
-
-`Task id = 4, exec_time = 304000000, run_delay = 58708000000, pcount = 155`
-
-`Task id = 5, exec_time = 304000000, run_delay = 58708000000, pcount = 155`
-
-`Task id = 6, exec_time = 296000000, run_delay = 56118000000, pcount = 177`
-
-`Task id = 7, exec_time = 296000000, run_delay = 56118000000, pcount = 177`
-
-`Task id = 8, exec_time = 296000000, run_delay = 56118000000, pcount = 177`
-
-`Task id = 9, exec_time = 296000000, run_delay = 56118000000, pcount = 177`
-
-`Task id = 10, exec_time = 296000000, run_delay = 56118000000, pcount = 177`
-
-`Task id = 11, exec_time = 57001000000, run_delay = 2998000000, pcount = 61`
+Task id =  1, exec_time =   305000000, run_delay = 59659000000, pcount = 156
+Task id =  2, exec_time =   302000000, run_delay = 58680000000, pcount = 154
+Task id =  3, exec_time =   304000000, run_delay = 58708000000, pcount = 155
+Task id =  4, exec_time =   304000000, run_delay = 58708000000, pcount = 155
+Task id =  5, exec_time =   304000000, run_delay = 58708000000, pcount = 155
+Task id =  6, exec_time =   296000000, run_delay = 56118000000, pcount = 177
+Task id =  7, exec_time =   296000000, run_delay = 56118000000, pcount = 177
+Task id =  8, exec_time =   296000000, run_delay = 56118000000, pcount = 177
+Task id =  9, exec_time =   296000000, run_delay = 56118000000, pcount = 177
+Task id = 10, exec_time =   296000000, run_delay = 56118000000, pcount = 177
+Task id = 11, exec_time = 57001000000, run_delay =  2998000000, pcount = 61
 ```
 Este resultado muestra la lista de tareas (numeradas por ID de tarea), su tiempo de ejecución total (en ticks), la cantidad de tiempo que esperaron para ejecutarse y, finalmente, la cantidad de veces que se invocaron.
 Un solo ticks representa cien nanosegundos.
 
 Según este escenario, las primeras cinco tareas son tareas ocupadas y duermen el 10% del tiempo. Las segundas cinco tareas duermen la mayor parte del tiempo y están ocupadas el 10% del tiempo. La última tarea es una tarea en tiempo real y está ocupada el 100% del tiempo. Como se muestra, la tarea en tiempo real recibe la mayor parte del procesador único y se invoca solo 61 veces.
+
+
+Ahora, veamos la misma prueba del Listado 4 pero esta vez en una topología de cuatro núcleos y cuatro sockets (16 procesadores lógicos). Como cada tarea puede tener su propio procesador lógico, recibe considerablemente más tiempo de procesador durante la misma duración de la prueba. Aunque las tareas ocupadas y no ocupadas se invocan el mismo número de veces, las tareas no ocupadas reciben el 10% del tiempo de ejecución en comparación con las tareas ocupadas. Esta diferencia es el resultado de la configuración de reposo / ocupado (las tareas ocupadas se ejecutan durante 90 ticks, mientras que las tareas no ocupadas se ejecutan durante 10 ticks). También es interesante notar que su tarea en tiempo real se invoca una vez y se ejecuta durante la prueba (porque nunca duerme, nunca se reprogramó en su procesador). El Listado 6 muestra la prueba.
+
+``` C
+Task id =  1, exec_time = 54000000000, run_delay = 0, pcount = 601
+Task id =  2, exec_time = 54000156250, run_delay = 0, pcount = 600
+Task id =  3, exec_time = 54000281250, run_delay = 0, pcount = 600
+Task id =  4, exec_time = 54000406250, run_delay = 0, pcount = 600
+Task id =  5, exec_time = 54000031250, run_delay = 0, pcount = 600
+Task id =  6, exec_time =  6000187500, run_delay = 0, pcount = 600
+Task id =  7, exec_time =  6000312500, run_delay = 0, pcount = 600
+Task id =  8, exec_time =  6000437500, run_delay = 0, pcount = 600
+Task id =  9, exec_time =  6000062500, run_delay = 0, pcount = 600
+Task id = 10, exec_time =  6000218750, run_delay = 0, pcount = 600
+Task id = 11, exec_time = 59999343750, run_delay = 0, pcount = 1
+```
+
 
 ### Conclusiones
 * Las tareas en tiempo real tienen mayor prioridad  a los procesos comunes nunca pueden ser bloqueados, mayor tiempo de ejecucion.
