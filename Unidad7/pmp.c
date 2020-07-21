@@ -40,15 +40,15 @@ int main(int argc, char* argv[]){
 	// Generacion de archivos de reporte
 	// Creacion de log para el sucuencial
 	FILE* fp;
-	fp = fopen("SequentialMultiplyTest.txt", "w+");
+	fp = fopen("multi-secuencial.txt", "w+");
 	fclose(fp);
 
 	// Creacion de log para multipliacion paralela
-	fp = fopen("ParallelMultiplyTest.txt", "w+");
+	fp = fopen("paralel-multi.txt", "w+");
 	fclose(fp);
 
 	// Creacion de log para multiplicaicon de matrices optimizada
-	fp = fopen("OptimizedParallelMultiplyTest.txt", "w+");
+	fp = fopen("optimi-multi.txt", "w+");
 	fclose(fp);
 
 	for(int dimension=200; dimension<=1000; dimension+=200){
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
 
 TYPE** randomSquareMatrix(int dimension){
 	/*
-		Generar una matriz de TIPO aleatorio bidimensional.
+		Generar una matriz de TIPO aleatorio esta son matrices cuadradas.
 	*/
 
 	TYPE** matrix = malloc(dimension * sizeof(TYPE*));
@@ -80,6 +80,7 @@ TYPE** randomSquareMatrix(int dimension){
 	//Random seed
 	srandom(time(0)+clock()+random());
 
+    // ya se utiliza OpenMp para reducir el tiempo de creacion
 	#pragma omp parallel for
 	for(int i=0; i<dimension; i++){
 		for(int j=0; j<dimension; j++){
@@ -123,13 +124,15 @@ void displaySquareMatrix(TYPE** matrix, int dimension){
 
 double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
-		Sequentiall multiply given input matrices and return resultant matrix
+        Multiplicacion secuencial de matrices recibe como entrada 
+        las matrices A y B y la matriz donde se almacenara la matrix C
+        y la respectiva dimension. y como resultado se optiene la matrix resultante
 	*/
 
 	struct timeval t0, t1;
 	gettimeofday(&t0, 0);
 
-	/* Head */
+	/* cabezera */
 	for(int i=0; i<dimension; i++){
 		for(int j=0; j<dimension; j++){
 			for(int k=0; k<dimension; k++){
@@ -137,7 +140,7 @@ double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int di
 			}
 		}
 	}
-	/* Tail */
+	/* Piso */
 
 	gettimeofday(&t1, 0);
 	double elapsed = (t1.tv_sec-t0.tv_sec) * 1.0f + (t1.tv_usec - t0.tv_usec) / 1000000.0f;
@@ -147,13 +150,14 @@ double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int di
 
 double parallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
-		Parallel multiply given input matrices and return resultant matrix
+        Multipliacion paralela entradas las matrices A y B y la matrix C
+        la dimension y como resultado se optiene la matriz resultante
 	*/
 
 	struct timeval t0, t1;
 	gettimeofday(&t0, 0);
 
-	/* Head */
+	/* cabecera */
 	#pragma omp parallel for
 	for(int i=0; i<dimension; i++){
 		for(int j=0; j<dimension; j++){
@@ -162,7 +166,7 @@ double parallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dime
 			}
 		}
 	}
-	/* Tail */
+	/* Final */
 
 	gettimeofday(&t1, 0);
 	double elapsed = (t1.tv_sec-t0.tv_sec) * 1.0f + (t1.tv_usec - t0.tv_usec) / 1000000.0f;
@@ -172,7 +176,9 @@ double parallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dime
 
 double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
-		Parallel multiply given input matrices using optimal methods and return resultant matrix
+	    Multipliacion paralela entradas las matrices A y B y la matrix C
+        la dimension y como resultado se optiene la matriz resultante
+        utilizando metodos mas optimos
 	*/
 
 	int i, j, k, iOff, jOff;
@@ -181,7 +187,7 @@ double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC,
 	struct timeval t0, t1;
 	gettimeofday(&t0, 0);
 
-	/* Head */
+	/* cabecera */
 	convert(matrixA, matrixB, dimension);
 	#pragma omp parallel shared(matrixC) private(i, j, k, iOff, jOff, tot) num_threads(40)
 	{
@@ -198,7 +204,7 @@ double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC,
 			}
 		}
 	}
-	/* Tail */
+	/* final o cola */
 
 	gettimeofday(&t1, 0);
 	double elapsed = (t1.tv_sec-t0.tv_sec) * 1.0f + (t1.tv_usec - t0.tv_usec) / 1000000.0f;
@@ -218,9 +224,9 @@ void convert(TYPE** matrixA, TYPE** matrixB, int dimension){
 
 void verifyMultiplication(TYPE** matrixA, TYPE** matrixB, TYPE** result, int dimension){
 	/*
-		Verify the result of the matrix multiplication
+		Verificacion del resultado de la multiplicación
 	*/
-	printf("Verifying Result\n");
+	printf("Verificando el resultado\n");
 	printf("----------------\n");
 	TYPE tot;
 	for(int i=0; i<dimension; i++){
@@ -230,29 +236,29 @@ void verifyMultiplication(TYPE** matrixA, TYPE** matrixB, TYPE** result, int dim
 				tot += matrixA[i][k] * matrixB[k][j];
 			}
 			if(tot != result[i][j]){
-				printf("Result is incorrect!\n");
+				printf("Resultado incorrecto!\n");
 				return;
 			}
 		}
 	}
-	printf("Result is correct!\n");
+	printf("Resultado incorrecto\n");
 
 }
 
 void sequentialMultiplyTest(int dimension, int iterations){
 	FILE* fp;
-	fp = fopen("SequentialMultiplyTest.txt", "a+");
+	fp = fopen("multi-secuencial.txt", "a+");
 
 	// Console write
 	printf("----------------------------------\n");
-	printf("Test : Multipliacion secuencial        \n");
+	printf("Prueba : Multipliacion secuencial        \n");
 	printf("----------------------------------\n");
 	printf("Dimension : %d\n", dimension);
 	printf("..................................\n");
 	
 	// File write
 	fprintf(fp, "----------------------------------\n");
-	fprintf(fp, "Test : Multipliacion secuencial        \n");
+	fprintf(fp, "Prueba : Multipliacion secuencial        \n");
 	fprintf(fp, "----------------------------------\n");
 	fprintf(fp, "Dimension : %d\n", dimension);
 	fprintf(fp, "..................................\n");
@@ -261,26 +267,26 @@ void sequentialMultiplyTest(int dimension, int iterations){
 	TYPE** matrixA = randomSquareMatrix(dimension);
 	TYPE** matrixB = randomSquareMatrix(dimension);
 	
-	// Iterate and measure performance
+	// Iteracion y rendimiento
 	for(int i=0; i<iterations; i++){
 		TYPE** matrixResult = zeroSquareMatrix(dimension);
 		opmLatency[i] = sequentialMultiply(matrixA, matrixB, matrixResult, dimension);
 		free(matrixResult);
 
-		// Console write
+		// consola
 		printf("%d.\t%f\n", i+1, opmLatency[i]);
 
-		// File write
+		// archivo
 		fprintf(fp, "%d.\t%f\n", i+1, opmLatency[i]);
 	}
 
-	// Console write
+	// consola
 	printf("\n");
 	printf("----------------------------------\n");
 	printf("Análisis              \n");
 	printf("----------------------------------\n");
 
-	// File write
+	// archivo
 	fprintf(fp, "\n");
 	fprintf(fp, "----------------------------------\n");
 	fprintf(fp, "Análisis              \n");
@@ -289,7 +295,7 @@ void sequentialMultiplyTest(int dimension, int iterations){
 	double sum = 0.0;
 	double sumSquared = 0.0;
 
-	// Statistical analyze
+	// Análisis estadistico
 	for(int i=0; i<iterations; i++){
 		sum += opmLatency[i];
 		sumSquared += pow(opmLatency[i], 2.0);
@@ -299,14 +305,14 @@ void sequentialMultiplyTest(int dimension, int iterations){
 	double squareMean = sumSquared / iterations;
 	double standardDeviation = sqrt(squareMean - pow(mean, 2.0));
 
-	// Console write
-	printf("Mean               : %f\n", mean);
-	printf("Standard Deviation : %f\n", standardDeviation);
+	// Console
+	printf("Media               : %f\n", mean);
+	printf("Desviacion Estandar : %f\n", standardDeviation);
 	printf("----------------------------------\n");
 
 	//File write
-	fprintf(fp, "Mean               : %f\n", mean);
-	fprintf(fp, "Standard Deviation : %f\n", standardDeviation);
+	fprintf(fp, "Media               : %f\n", mean);
+	fprintf(fp, "Desviacion Estandar : %f\n", standardDeviation);
 	fprintf(fp, "----------------------------------\n");
 
 	// Releasing memory
@@ -318,18 +324,18 @@ void sequentialMultiplyTest(int dimension, int iterations){
 
 void parallelMultiplyTest(int dimension, int iterations){
 	FILE* fp;
-	fp = fopen("ParallelMultiplyTest.txt", "a+");
+	fp = fopen("paralel.txt", "a+");
 
 	// Console write
 	printf("----------------------------------\n");
-	printf("Test : Parallel Multiply          \n");
+	printf("Prueba : Multiplicacion paralela          \n");
 	printf("----------------------------------\n");
 	printf("Dimension : %d\n", dimension);
 	printf("..................................\n");
 	
 	// File write
 	fprintf(fp, "----------------------------------\n");
-	fprintf(fp, "Test : Parallel Multiply          \n");
+	fprintf(fp, "Prueba : Multiplicacion paralela          \n");
 	fprintf(fp, "----------------------------------\n");
 	fprintf(fp, "Dimension : %d\n", dimension);
 	fprintf(fp, "..................................\n");
@@ -354,19 +360,19 @@ void parallelMultiplyTest(int dimension, int iterations){
 	// Console write
 	printf("\n");
 	printf("----------------------------------\n");
-	printf("Analyze Measurements              \n");
+	printf("Análisis              \n");
 	printf("----------------------------------\n");
 
 	// File write
 	fprintf(fp, "\n");
 	fprintf(fp, "----------------------------------\n");
-	fprintf(fp, "Analyze Measurements              \n");
+	fprintf(fp, "Análisis              \n");
 	fprintf(fp, "----------------------------------\n");
 
 	double sum = 0.0;
 	double sumSquared = 0.0;
 
-	// Statistical analyze
+	// Análisis estadistico
 	for(int i=0; i<iterations; i++){
 		sum += opmLatency[i];
 		sumSquared += pow(opmLatency[i], 2.0);
@@ -377,16 +383,16 @@ void parallelMultiplyTest(int dimension, int iterations){
 	double standardDeviation = sqrt(squareMean - pow(mean, 2.0));
 
 	// Console write
-	printf("Mean               : %f\n", mean);
-	printf("Standard Deviation : %f\n", standardDeviation);
+	printf("Media               : %f\n", mean);
+	printf("Desviacion Estandar : %f\n", standardDeviation);
 	printf("----------------------------------\n");
 
 	//File write
-	fprintf(fp, "Mean               : %f\n", mean);
-	fprintf(fp, "Standard Deviation : %f\n", standardDeviation);
+	fprintf(fp, "Media               : %f\n", mean);
+	fprintf(fp, "Desviacion Estandar : %f\n", standardDeviation);
 	fprintf(fp, "----------------------------------\n");
 
-	// Releasing memory
+	// liberar memoria
 	fclose(fp);
 	free(opmLatency);
 	free(matrixA);
@@ -395,18 +401,18 @@ void parallelMultiplyTest(int dimension, int iterations){
 
 void optimizedParallelMultiplyTest(int dimension, int iterations){
 	FILE* fp;
-	fp = fopen("OptimizedParallelMultiplyTest.txt", "a+");
+	fp = fopen("optimi-multi.txt", "a+");
 
 	// Console write
 	printf("----------------------------------\n");
-	printf("Test : Optimized Parallel Multiply\n");
+	printf("Prueba : Multiplicacion paralela optimizada\n");
 	printf("----------------------------------\n");
 	printf("Dimension : %d\n", dimension);
 	printf("..................................\n");
 	
 	// File write
 	fprintf(fp, "----------------------------------\n");
-	fprintf(fp, "Test : Optimized Parallel Multiply\n");
+	fprintf(fp, "Prueba : Multiplicacion paralela optimizada\n");
 	fprintf(fp, "----------------------------------\n");
 	fprintf(fp, "Dimension : %d\n", dimension);
 	fprintf(fp, "..................................\n");
@@ -415,7 +421,7 @@ void optimizedParallelMultiplyTest(int dimension, int iterations){
 	TYPE** matrixA = randomSquareMatrix(dimension);
 	TYPE** matrixB = randomSquareMatrix(dimension);
 	
-	// Iterate and measure performance
+	// iteracion y medicion de rendimiento
 	for(int i=0; i<iterations; i++){
 		TYPE** matrixResult = zeroSquareMatrix(dimension);
 		opmLatency[i] = optimizedParallelMultiply(matrixA, matrixB, matrixResult, dimension);
@@ -431,19 +437,19 @@ void optimizedParallelMultiplyTest(int dimension, int iterations){
 	// Console write
 	printf("\n");
 	printf("----------------------------------\n");
-	printf("Analyze Measurements              \n");
+	printf("Análisis de medidas              \n");
 	printf("----------------------------------\n");
 
 	// File write
 	fprintf(fp, "\n");
 	fprintf(fp, "----------------------------------\n");
-	fprintf(fp, "Analyze Measurements              \n");
+	fprintf(fp, "Análisis de medidas            \n");
 	fprintf(fp, "----------------------------------\n");
 
 	double sum = 0.0;
 	double sumSquared = 0.0;
 
-	// Statistical analyze
+	// Análisis estadistico
 	for(int i=0; i<iterations; i++){
 		sum += opmLatency[i];
 		sumSquared += pow(opmLatency[i], 2.0);
@@ -454,16 +460,16 @@ void optimizedParallelMultiplyTest(int dimension, int iterations){
 	double standardDeviation = sqrt(squareMean - pow(mean, 2.0));
 
 	// Console write
-	printf("Mean               : %f\n", mean);
-	printf("Standard Deviation : %f\n", standardDeviation);
+	printf("Media               : %f\n", mean);
+	printf("Desviacion estandar : %f\n", standardDeviation);
 	printf("----------------------------------\n");
 
 	//File write
-	fprintf(fp, "Mean               : %f\n", mean);
-	fprintf(fp, "Standard Deviation : %f\n", standardDeviation);
+	fprintf(fp, "Media               : %f\n", mean);
+	fprintf(fp, "Desviacion estandar : %f\n", standardDeviation);
 	fprintf(fp, "----------------------------------\n");
 
-	// Releasing memory
+	// liberacion de memoria
 	fclose(fp);
 	free(opmLatency);
 	free(matrixA);
