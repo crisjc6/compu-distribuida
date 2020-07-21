@@ -38,7 +38,7 @@ double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int di
 	struct timeval t0, t1;
 	gettimeofday(&t0, 0);
 
-	/* cabezera */
+	/* cabecera */
 	for(int i=0; i<dimension; i++){
 		for(int j=0; j<dimension; j++){
 			for(int k=0; k<dimension; k++){
