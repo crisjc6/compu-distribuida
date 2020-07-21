@@ -23,7 +23,7 @@ Ejecución:
 
 ### Desarrollo
 
-* Maquina gitpod
+* Maquina gitpod Virtual
   
 model name      : Intel(R) Xeon(R) CPU @ 2.20GHz
 8 core cpu fisicos
@@ -44,7 +44,13 @@ cache size : 3072 KB
 
 
 * Maquina fisica 2
+model name      : Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+6 core cpu fisicos
+0 core cpu logicos
+cache size : 9216 KB
 
+
+![image](https://user-images.githubusercontent.com/50051312/88013700-abaeca00-cae2-11ea-956d-659a31ee29fd.png)
 
 
 ### Análisis
