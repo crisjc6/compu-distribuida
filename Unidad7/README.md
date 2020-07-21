@@ -24,7 +24,7 @@ Ejecución:
 ### Desarrollo
 
 #### Multiplicación secuencial
-``` c++
+```c
 double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
         Multiplicacion secuencial de matrices recibe como entrada 
@@ -55,7 +55,7 @@ double sequentialMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int di
 
 #### Multiplación paralela OpenMp
 
-``` c++ 
+```c
 double parallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
         Multipliacion paralela entradas las matrices A y B y la matrix C
@@ -84,7 +84,7 @@ double parallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dime
 ``` 
 
 #### Optimizacion Multiplicación paralela OpenMp
-``` c++
+```c
 double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC, int dimension){
 	/*
 	    Multipliacion paralela entradas las matrices A y B y la matrix C
