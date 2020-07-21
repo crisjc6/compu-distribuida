@@ -172,4 +172,4 @@ double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC,
 ### Futuras acciones
 
 ### Referencias
-[matrix multiplicacion](https://medium.com/tech-vision/parallel-matrix-multiplication-c-parallel-processing-5e3aadb36f27)
+[matrix multiplicacion github](https://github.com/crisjc6/compu-distribuida/tree/master/Unidad7)
