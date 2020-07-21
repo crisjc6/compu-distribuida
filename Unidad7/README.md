@@ -25,9 +25,23 @@ Ejecución:
 
 * Maquina gitpod
   
+model name      : Intel(R) Xeon(R) CPU @ 2.20GHz
+8 core cpu fisicos
+16 core cpu logicos
+cache size : 56320 KB
+  
 ![image](https://user-images.githubusercontent.com/50051312/88010785-5327fe80-cadb-11ea-9e9b-840d06524f1c.png)
 
 * Maquina fisica 1 
+  
+model name	: Intel(R) Core(TM) i5 CPU       M 450  @ 2.40GHz
+2 core cpu fisicos
+4 core cpu logicos
+cache size : 3072 KB
+
+
+![image](https://user-images.githubusercontent.com/50051312/88012293-21189b80-cadf-11ea-8e40-9ec53e149d98.png)
+
 
 * Maquina fisica 2
 
