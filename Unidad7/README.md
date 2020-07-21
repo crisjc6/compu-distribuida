@@ -129,7 +129,7 @@ double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC,
   
 > model name      : Intel(R) Xeon(R) CPU @ 2.20GHz
 
-> 8 core cpu fisicos
+> 8 cpu asignada
 
 > 16 core cpu logicos
 
