@@ -324,7 +324,7 @@ void sequentialMultiplyTest(int dimension, int iterations){
 
 void parallelMultiplyTest(int dimension, int iterations){
 	FILE* fp;
-	fp = fopen("paralel.txt", "a+");
+	fp = fopen("paralel-multi.txt", "a+");
 
 	// Console write
 	printf("----------------------------------\n");

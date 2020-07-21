@@ -10,8 +10,8 @@ memoria para poder evitar los misses de cache. Los resultados de rendimiento se 
 * Multiplicación de matrices secuencial
 * Multiplicación de matrices parallel-Loop
 * Multiplicación de matrices optimizado el parallel-Loop
- 
-### Desarrollo
+
+### Compilación y Ejecución
 
 run program :
 `cc -o matrixMulti  pmp.c -fopenmp -lm`
@@ -20,6 +20,17 @@ fopenmp: Llamara a la libreria de openMp
 
 Ejecución:
 `./matrixMulti <Number of iterations>`
+
+### Desarrollo
+
+* Maquina gitpod
+  
+![image](https://user-images.githubusercontent.com/50051312/88010785-5327fe80-cadb-11ea-9e9b-840d06524f1c.png)
+
+* Maquina fisica 1 
+
+* Maquina fisica 2
+
 
 
 ### Análisis
