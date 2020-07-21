@@ -11,6 +11,10 @@ memoria para poder evitar los misses de cache. Los resultados de rendimiento se 
 * Multiplicación de matrices parallel-Loop
 * Multiplicación de matrices optimizado el parallel-Loop
 
+### Requisuitos 
+* C
+* OpenMp
+
 ### Compilación y Ejecución
 
 run program :
