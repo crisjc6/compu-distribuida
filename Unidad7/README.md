@@ -26,3 +26,6 @@ Ejecución:
 ### Conclusiones
 ### Recomendaciones
 ### Futuras acciones
+
+### Referencias
+[matrix multiplicacion](https://medium.com/tech-vision/parallel-matrix-multiplication-c-parallel-processing-5e3aadb36f27)
