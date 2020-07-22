@@ -127,6 +127,11 @@ double optimizedParallelMultiply(TYPE** matrixA, TYPE** matrixB, TYPE** matrixC,
 }
 ``` 
 
+#### Operación conv 
+
+![image](https://user-images.githubusercontent.com/50051312/88197470-28879400-cc08-11ea-9dd2-1efc39403776.png)
+
+
 ### Resultados
 * Maquina gitpod Virtual
   
