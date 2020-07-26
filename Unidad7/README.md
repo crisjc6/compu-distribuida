@@ -2,11 +2,10 @@
 
 ### Introducción
 
-La multiplicaición de matrices son uno de los principales problemas dentro de la implementacion de programas paralelos.
-Teniendo en cuenta que de manera secuencial mientras mas alto es el numero de dimenciones de las matrices son requieren un timpo de ejecucion mayor
-La paralelizacion con OpenMp permite controlar con hilos de cada operacion con la multiplicaición de matrices 
-Ejemplo que se desarrollo para la implementacion es de la multiplicacion de matrices cuadradas esto se realiza de maenra eficiente con OpenMp ademans se plantea optimizar con la asignacion en 
-memoria para poder evitar los misses de cache. Los resultados de rendimiento se prensetan en tres archivos
+La multiplicación de matrices son uno de los principales problemas dentro de la implementación de programas paralelos.
+Teniendo en cuenta que de manera secuencial mientras más alto es el número de dimensiones de las matrices son requieren un tiempo de ejecución mayor
+La paralelización con OpenMp permite controlar con hilos de cada operación con la multiplicación de matrices 
+Ejemplo que se desarrolló para la implementación es de la multiplicación de matrices cuadradas esto se realiza de manera eficiente con OpenMp además se plantea optimizar con la asignación en memoria para poder evitar los misses de cache. Los resultados de rendimiento se presentan en tres archivos
 * Multiplicación de matrices secuencial
 * Multiplicación de matrices parallel-Loop
 * Multiplicación de matrices optimizado el parallel-Loop
