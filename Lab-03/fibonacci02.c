@@ -39,7 +39,7 @@ int fib_recursive_omp(int n) {
     }
 }
 
-int fib_recursive_omp_fix(int n) {
+/*int fib_recursive_omp_fix(int n) {
     int i, j;
     if (n<2)
     return n;
@@ -59,30 +59,38 @@ int fib_recursive_omp_fix(int n) {
            return i+j;
         }
     }
-}
+}*/
 
 int main(int argc, char* argv[]){
 	int n = strtol(argv[1], NULL, 10);
     uint64_t result;
     double dtime;
 
+    dtime = omp_get_wtime();
+    result = fib_iterative(n);
+    dtime = omp_get_wtime() - dtime;
+    printf("iterative time %f, results %lu\n", dtime, result);
 
+        dtime = omp_get_wtime();
+    result = fib_recursive(n);
+    dtime = omp_get_wtime() - dtime;
+    printf("recursive only time %f, results %lu\n", dtime, result);
 
     dtime = omp_get_wtime();
     result = fib_recursive_omp(n);
     dtime = omp_get_wtime() - dtime;
     printf("recursive omp time %f, results %lu\n", dtime, result);
 
-    omp_set_num_threads(1);
+  /*  omp_set_num_threads(1);
     dtime = omp_get_wtime();
     result = fib_recursive_omp_fix(n);
     dtime = omp_get_wtime() - dtime;
-    printf("recursive omp fix 1 thread time %f, results %lu\n", dtime, result);
+    printf("recursive omp fix 1 thread time %f, results %lu\n", dtime, result);*/
 
-    omp_set_num_threads(2);
+   /* omp_set_num_threads(2);
     dtime = omp_get_wtime();
     result = fib_recursive_omp_fix(n);
     dtime = omp_get_wtime() - dtime;
-    printf("recursive omp fix 2 thread, time %f, results %lu\n", dtime, result);
+    printf("recursive omp fix 2 thread, time %f, results %lu\n", dtime, result);*/
 
 }

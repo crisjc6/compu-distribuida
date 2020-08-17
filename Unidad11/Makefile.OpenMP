@@ -1,0 +1,56 @@
+all:	buclesAnidados-3-5 buclesColapsados-3-6 buclesSeparados-3-7 \
+	interDepend-3-11 buclesIterIndepend-3-3 pi-3-15 pi-3-16 tareas-3-24 \
+	rndShoot-3-17 rndShoot-3-18 reduccion-3-14 runtime-3-20 test \
+	rndShootParSec-3-19 hola-3-1
+
+hola-3-1:	hola-3-1.o
+	cc -o hola-3-1 -fopenmp hola-3-1.c
+
+buclesAnidados-3-5:	buclesAnidados-3-5.o
+	cc -o buclesAnidados-3-5 -fopenmp buclesAnidados-3-5.c
+
+buclesColapsados-3-6:	buclesColapsados-3-6.o
+	cc -o buclesColapsados-3-6 -fopenmp buclesColapsados-3-6.c
+
+buclesSeparados-3-7:	buclesSeparados-3-7.o
+	cc -o buclesSeparados-3-7 -fopenmp buclesSeparados-3-7.c
+
+interDepend-3-11:	interDepend-3-11.o
+	cc -o interDepend-3-11 -fopenmp interDepend-3-11.c
+
+buclesIterIndepend-3-3:	buclesIterIndepend-3-3.o
+	cc -o buclesIterIndepend-3-3 -fopenmp buclesIterIndepend-3-3.c
+
+pi-3-15:	pi-3-15.o
+	cc -o pi-3-15 -fopenmp pi-3-15.c -lm
+
+pi-3-16:	pi-3-16.o
+	cc -o pi-3-16 -fopenmp pi-3-16.c -lm
+
+rndShoot-3-17:	rndShoot-3-17.o
+	cc -o rndShoot-3-17 -fopenmp rndShoot-3-17.c
+
+rndShoot-3-18:	rndShoot-3-18.o
+	cc -o rndShoot-3-18 -fopenmp rndShoot-3-18.c
+
+rndShootParSec-3-19:	rndShootParSec-3-19.o
+	cc -o rndShootParSec-3-19 -fopenmp rndShootParSec-3-19.c
+
+reduccion-3-14:	reduccion-3-14.o
+	cc -o reduccion-3-14 -fopenmp reduccion-3-14.c
+
+runtime-3-20:	runtime-3-20.o
+	cc -o runtime-3-20 -fopenmp runtime-3-20.c
+
+tareas-3-24:	tareas-3-24.o
+	cc -o tareas-3-24 -fopenmp tareas-3-24.c
+
+test:	test.o
+	cc -o test -fopenmp test.c
+
+clean:
+	rm *.o
+	rm buclesAnidados-3-5 buclesColapsados-3-6 buclesSeparados-3-7 \
+	interDepend-3-11 buclesIterIndepend-3-3 pi-3-15 pi-3-16 tareas-3-24 \
+	rndShoot-3-17 rndShoot-3-18 reduccion-3-14 runtime-3-20 test \
+	rndShootParSec-3-19 hola-3-1
