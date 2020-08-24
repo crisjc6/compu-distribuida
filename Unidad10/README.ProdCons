@@ -1,0 +1,39 @@
+Servidores concurrentes ECHO con hilos
+  implementan el modelo productor - consumidor
+
+TCPmtechod.c - main, TCPechod, prstats 
+	implementa una relacion productor - consumidor simple
+	utiliza solo mutex
+	struct stats - contadores estadisticos compartidos entre los hilos
+	TCPechod - hilos productores: actualizan los contadores estadisticos
+	prstats - hilo consumidor: lee los contadores estadisticos
+		duerme 5 segundos y lee los contadores
+	st_mutex - controla el acceso exclusivo a las secciones criticas que 
+		actualizan y leen los contadores estadisticos compartidos
+
+TCPmtechod-cv.c - main, TCPechod, prstats
+	implementa una relacion productor - consumidor simple
+	utiliza mutex y una variable condicional
+	struct stats - contadores estadisticos compartidos entre los hilos
+	TCPechod - hilos productores: actualizan los contadores estadisticos
+	prstats - hilo consumidor: lee los contadores estadisticos
+		duerme 5 segundos y lee los contadores
+	st_mutex - controla el acceso exclusivo a las secciones criticas que 
+		actualizan y leen los contadores estadisticos compartidos
+     cond_consumidor - variable condicional que obliga al condumidro a 
+		desplegar informacion, unicamente cuando existan actualizaciones
+
+TODO: Los estudiantes deben implementar la segunda variable condicional que
+impida que los threads productores actualicen la informacion "stats"
+antes de que esta informacion haya sido "consumida" por el thread
+consumidor prstats.
+
+COMPILAR: 
+ 	make -f Makefile.ProdCons
+
+EJECUTAR SERVIDORES:
+	./TCPmtechod
+	./TCPmtechod-cv
+
+CLIENTES:
+	telnet localhost 10007

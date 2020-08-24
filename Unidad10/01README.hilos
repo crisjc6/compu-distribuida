@@ -1,0 +1,73 @@
+PROGRAMAS DE HILOS Y SINCRONIZACION EN JAVA
+UNIDAD 10 DEL CURSO ICCR613
+
+Los programas estan, aproximadamente, en el mismo orden de la presentacion PPT
+de la unidad 10
+
+
+Hilos1.java - creacion de subclase de Threads
+
+Hilos2.java - implementacion de interfaz Runnable
+
+MatrixMult.java - multiplicacion de matrices 3x3: 1 hilo para cada fila
+
+Increment.java - c++ concurrente sin control de concurrencia
+
+IncrementSync.java - c++ con synchronized
+
+ExpandableArray.java - fully synchronized class
+
+ProdCons.java - wait / notify
+
+BoundedBuffer.java - variables condicionales: productor - consumidor
+
+RunnableException.java - procesamiento de excepciones
+
+Task1.java - task Runnable como expresion lambda
+
+TaskSleep.java - task utilizando sleep
+
+Executor1.java - ejemplo de executor runnable: no retorna nada
+
+ExecutorCallable.java - executor para tareas callable - retorna FUTURE
+
+ExecutorShutdown.java - Es necesario shutdown() o shutdownNow() al executor
+
+FutureTO.java - Future.get() con timeout
+
+InvokeAll.java - invocar todos los futures (callables)
+
+InvokeAny.java - invocar alguno de los futures (callables)
+
+ScheduledFuturo.java - ScheduledAtFixedRate
+
+ReentranteLock.java - locks reentrantes
+
+LocksMethods.java - algunos metodos de locks reentrantes
+
+RWLocks.java - ejemplo con read / write locks
+
+StampedLocks.java - ejemplo de locks con marcas de tiempo
+
+OptimisticLocks.java - uso de stamped locks para locking optimista
+
+StampedConvert.java - convertir un read lock en write lock
+
+Semaforos.java - ejemplo con counting semaphores
+
+EnteroAtomico.java - Uso de enteros atomicos
+
+UpdateAndGet.java - uso del metodo updateAndGet() de enteros atomicos
+
+AccumulateAndGet.java - uso del metodo accumulateAndGet() de enteros atomicos
+
+LongAcumulador.java - ejemplo de longAccumulator
+
+LongAdder.java - ejemplo de longAdder
+
+MapaConcurrente.java - ejemplos de uso de los metodos de ConcurrentMap
+
+MapaHashConcurrente.java - ejemplos de uso de los metodos de ConcurrentHashMap
+
+ConcurrentUtils.java - metodos sleep() y stop() executor
+
